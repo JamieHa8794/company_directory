@@ -1,4 +1,4 @@
-const { db, syncAndSeed } = require('./db/index')
+const { db, syncAndSeed, models: { Staff } } = require('./db/index')
 
 const express = require('express');
 const app = express();
@@ -8,6 +8,16 @@ const path = require('path')
 app.get('/', (req, res, next)=>{
     try{
         res.sendFile(path.join(__dirname, 'index.html'))
+    }
+    catch(err){
+        next(err);
+    }
+})
+
+app.get('/api/staff', async (req, res, next)=>{
+    try{
+        const staff = await Staff.findAll();
+        res.send(staff)
     }
     catch(err){
         next(err);
