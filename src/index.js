@@ -21,6 +21,7 @@ const renderStaffDetails = (staff) =>{
 
     const staffInfo = document.getElementById('staff-info')
     const html = `
+        <img src=${staff.avatar}>
         <li>
             Company: ${staff.companyName}
         </li>
