@@ -1,9 +1,6 @@
 import axios from 'axios'
 
 
-
-console.log('hello world')
-
 const renderStaff = (staff) =>{
     const staffList = document.getElementById('staff-List')
     const html = staff.map(staffCard =>{
@@ -18,12 +15,34 @@ const renderStaff = (staff) =>{
     staffList.innerHTML = html
 }
 
+const renderStaffDetails = (staff) =>{
+    const staffInfoH2 = document.getElementById('staff-info-h2')
+    staffInfoH2.innerHTML = `${staff.firstName} ${staff.lastName}'s Info`
+
+    const staffInfo = document.getElementById('staff-info')
+    const html = `
+        <li>
+            Company: ${staff.companyName}
+        </li>
+        <li>
+            Position: ${staff.position}
+        </li>
+    `
+    staffInfo.innerHTML = html;
+}
+
+
+window.addEventListener('hashchange', async ()=>{
+    const staffId = window.location.hash.slice(1)*1;
+
+    const staff = await (await (axios.get(`/api/staff/${staffId}`))).data;
+    renderStaffDetails(staff);
+})
 
 
 const init = async () =>{
     try{
         const staff = (await (axios.get('/api/staff'))).data;
-        console.log(staff)
         renderStaff(staff)
 
     }
