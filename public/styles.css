@@ -13,4 +13,25 @@ img{
     height: 200px;
     width: 200px;
     border-radius: 50%;
+    opacity: 80%;
 }
+/* unvisited link */
+a:link {
+    color: blue
+  }
+  
+  /* visited link */
+  a:visited {
+    color: blue
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: darkred;
+    font-weight: bolder;
+  }
+  
+  /* selected link */
+  a:active {
+    color: blue;
+  }
