@@ -26,7 +26,7 @@ const Staff = db.define('staff', {
 })
 
 const createStaffInfo = () =>{
-    const staffList = new Array(50).fill('').map( staff =>{
+    const staffList = new Array(20).fill('').map( staff =>{
         return(
             staff = {
                 firstName: faker.name.firstName(),
