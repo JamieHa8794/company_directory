@@ -13,8 +13,13 @@ const Staff = db.define('staff', {
     },
     sex:{
         type: STRING
+    },
+    companyName:{
+        type: STRING
+    },
+    position:{
+        type: STRING
     }
-
 })
 
 const createStaffInfo = () =>{
@@ -23,7 +28,9 @@ const createStaffInfo = () =>{
             staff = {
                 firstName: faker.name.firstName(),
                 LastName: faker.name.lastName(),
-                sex: faker.name.gender(binary= true)
+                sex: faker.name.gender(binary= true),
+                companyName: faker.company.companyName() + " " + faker.company.companySuffix(),
+                position: faker.name.jobTitle()
             }
         )
     })
@@ -37,7 +44,7 @@ const syncAndSeed = async () =>{
         console.log('connected to db')
         const staffList = createStaffInfo();
         await Promise.all(staffList.map(staff =>{
-            return(Staff.create({ firstName: staff.firstName, lastName: staff.LastName, sex: staff.sex }))
+            return(Staff.create({ firstName: staff.firstName, lastName: staff.LastName, sex: staff.sex, companyName: staff.companyName, position: staff.position }))
         }))
     }
     catch(err){
